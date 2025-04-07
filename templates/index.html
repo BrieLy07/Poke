@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PokeApp</title>
+    <style>
+        /* Estilos básicos para empezar */
+        body { font-family: sans-serif; }
+        .search-container { margin-bottom: 20px; text-align: center; }
+        .pokemon-gallery { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; }
+        .pokemon-card { border: 1px solid #ccc; border-radius: 8px; padding: 10px; text-align: center; width: 150px; }
+        .pokemon-card img { max-width: 100px; height: auto; }
+        .pokemon-card h3 { margin: 5px 0; font-size: 1em; text-transform: capitalize; }
+        .pokemon-card p { font-size: 0.8em; color: #555; margin: 5px 0; }
+    </style>
+</head>
+<body>
+
+    <h1>Mi PokeApp</h1>
+
+    <div class="search-container">
+        <form method="get" action="/">
+            <input type="search" name="search" placeholder="Buscar Pokémon..." value="{{ search_term }}">
+            <button type="submit">Buscar</button>
+        </form>
+    </div>
+
+    <div class="pokemon-gallery">
+        {% if pokemons %}
+            {% for pokemon in pokemons %}
+            <div class="pokemon-card">
+                {% if pokemon.image %}
+                <img src="{{ pokemon.image }}" alt="{{ pokemon.name }}">
+                {% else %}
+                <p>(Sin imagen)</p>
+                {% endif %}
+                <h3>{{ pokemon.name }}</h3>
+                <p>Tipos: {{ pokemon.types | join(', ') }}</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No se encontraron Pokémon o hubo un error al cargar.</p>
+        {% endif %}
+    </div>
+
+    </body>
+
+
+</html>
+
